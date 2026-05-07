@@ -1,1 +1,1 @@
-# Email Template Tool
+# Email Assist Tool
