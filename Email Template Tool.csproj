@@ -1,17 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
-    <RootNamespace>Email_Assist_Tool</RootNamespace>
+    <RootNamespace>Email_Template_Tool</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>email tool.ico</ApplicationIcon>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>EmailTemplateTool.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>False</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="email tool.ico" />
   </ItemGroup>
-
 </Project>

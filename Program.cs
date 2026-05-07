@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Email_Assist_Tool
+namespace Email_Template_Tool
 {
     internal static class Program
     {

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Configuration;
 using System.Windows.Forms;
 
-namespace Email_Assist_Tool
+namespace Email_Template_Tool
 {
     public partial class mainForm : Form
     {
@@ -40,7 +39,7 @@ namespace Email_Assist_Tool
 
             List<string> list = new List<string>();
 
-            foreach (string directory in  directories)
+            foreach (string directory in directories)
             {
                 string folderName = $"{Path.GetFileName(directory)} {folderIdentifier}";
                 list.Add(folderName);
@@ -51,7 +50,6 @@ namespace Email_Assist_Tool
                 string fileString = file.Name;
                 string newstring = fileString.Substring(0, fileString.Length - 4);
                 list.Add(newstring);
-
             }
             String[] str = list.ToArray();
 
@@ -63,7 +61,8 @@ namespace Email_Assist_Tool
             if (cboxSubTemplate.Visible == false)
             {
                 string templateSelected = cbxTemplate.Text;
-                string templatePath = initialPath + @"\config\Templates\" + templateSelected + ".msg";
+                string templatePath =
+                    initialPath + @"\config\Templates\" + templateSelected + ".msg";
 
                 string templateDir = initialPath + @"\config\Templates";
                 string trashDir = initialPath + @"\config\trash";
@@ -85,13 +84,17 @@ namespace Email_Assist_Tool
                     string copyEmailPath = trashDir + "\\" + newName;
                     try
                     {
-                        File.Copy(Path.Combine(templateDir, fName), Path.Combine(trashDir, newName), true);
+                        File.Copy(
+                            Path.Combine(templateDir, fName),
+                            Path.Combine(trashDir, newName),
+                            true
+                        );
                         new Process
                         {
                             StartInfo = new ProcessStartInfo(copyEmailPath)
                             {
-                                UseShellExecute = true
-                            }
+                                UseShellExecute = true,
+                            },
                         }.Start();
                     }
                     catch (Exception err)
@@ -101,13 +104,17 @@ namespace Email_Assist_Tool
                     }
                 }
             }
-
             else
             {
                 string templateSelectedSubTemplate = cboxSubTemplate.Text;
-                string templatePathSubTemplate = initialPath + $@"\config\Templates\{selectedFolder}\" + templateSelectedSubTemplate + ".msg";
+                string templatePathSubTemplate =
+                    initialPath
+                    + $@"\config\Templates\{selectedFolder}\"
+                    + templateSelectedSubTemplate
+                    + ".msg";
 
-                string templateDirSubTemplate = initialPath + $@"\config\Templates\{selectedFolder}";
+                string templateDirSubTemplate =
+                    initialPath + $@"\config\Templates\{selectedFolder}";
                 string trashDir = initialPath + @"\config\trash";
 
                 if (!File.Exists(templatePathSubTemplate))
@@ -127,13 +134,17 @@ namespace Email_Assist_Tool
                     string copyEmailPathSubTemplate = trashDir + "\\" + newNameSubTemplate;
                     try
                     {
-                        File.Copy(Path.Combine(templateDirSubTemplate, fNameSubTemplate), Path.Combine(trashDir, newNameSubTemplate), true);
+                        File.Copy(
+                            Path.Combine(templateDirSubTemplate, fNameSubTemplate),
+                            Path.Combine(trashDir, newNameSubTemplate),
+                            true
+                        );
                         new Process
                         {
                             StartInfo = new ProcessStartInfo(copyEmailPathSubTemplate)
                             {
-                                UseShellExecute = true
-                            }
+                                UseShellExecute = true,
+                            },
                         }.Start();
                     }
                     catch (Exception err)
@@ -143,7 +154,6 @@ namespace Email_Assist_Tool
                     }
                 }
             }
-            
         }
 
         private void cboxSubTemplate_VisibleChanged(object sender, EventArgs e)
@@ -157,7 +167,7 @@ namespace Email_Assist_Tool
             {
                 this.MinimumSize = new System.Drawing.Size(340, 175);
                 this.Size = new System.Drawing.Size(this.Size.Width, 175);
-            } 
+            }
         }
 
         private void cbxTemplate_SelectedValueChanged(object sender, EventArgs e)
@@ -173,7 +183,9 @@ namespace Email_Assist_Tool
 
                 cboxSubTemplate.DataSource = null;
 
-                DirectoryInfo diSubTemplate = new DirectoryInfo(initialPath + $@"\config\Templates\{selectedFolder}");
+                DirectoryInfo diSubTemplate = new DirectoryInfo(
+                    initialPath + $@"\config\Templates\{selectedFolder}"
+                );
 
                 FileInfo[] filesSubTemplate = diSubTemplate.GetFiles("*.msg");
 
@@ -182,20 +194,21 @@ namespace Email_Assist_Tool
                 foreach (FileInfo file in filesSubTemplate)
                 {
                     string fileStringSubTemplate = file.Name;
-                    string newstringSubTemplate = fileStringSubTemplate.Substring(0, fileStringSubTemplate.Length - 4);
+                    string newstringSubTemplate = fileStringSubTemplate.Substring(
+                        0,
+                        fileStringSubTemplate.Length - 4
+                    );
                     listSubTemplate.Add(newstringSubTemplate);
-
                 }
                 String[] strSubTemplate = listSubTemplate.ToArray();
 
                 cboxSubTemplate.DataSource = strSubTemplate;
             }
-            else 
+            else
             {
                 cboxSubTemplate.Visible = false;
                 labelSubTemplate.Visible = false;
             }
-            
         }
     }
 }
